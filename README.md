@@ -1,5 +1,5 @@
 # Modular Toolbox
-## Note: This project is WIP.
+Note: This project is WIP.
 ## Description
 - This is my very first coding project in python. @porkiedev leads me through some of the processes.
 
