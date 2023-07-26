@@ -1,5 +1,6 @@
 from modules.app1_password_gen import password_gen_prompt
 from modules.app2_character_sorter import char_sorter_prompt
+from modules.app3_num_guesser import num_guesser_prompt
 
 if __name__ == '__main__':
 
@@ -9,7 +10,7 @@ if __name__ == '__main__':
         user_input = input("> ")
         user_choice = ''.join(c for c in user_input if c.isnumeric())
         if len(user_choice) > 0:
-            if 0 < int(user_choice) <= 2:
+            if 0 < int(user_choice) <= 3:
                 break  # break after there's a numeric & legit length
 
     user_choice = int(user_choice)
@@ -18,3 +19,5 @@ if __name__ == '__main__':
             password_gen_prompt()
         case 2:
             char_sorter_prompt()
+        case 3:
+            num_guesser_prompt()
