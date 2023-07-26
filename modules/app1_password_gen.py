@@ -3,7 +3,7 @@ import string
 
 
 def password_gen_prompt():
-    min_pw_length, max_pw_length = 5, 80
+    min_pw_length, max_pw_length = 8, 256
 
     while True:  # infinite loop until the break
         # asks user the length of the password
