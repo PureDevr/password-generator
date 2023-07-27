@@ -2,10 +2,20 @@ import random
 import time
 
 grids = [['', '', ''], ['', '', ''], ['', '', '']]
-formatGrids = ("  1  2  3",
-               "A ", grids[0][0], "  ", grids[0][1], "  ", grids[0][2], "\n",
-               "B ", grids[1][0], "  ", grids[2][1], "  ", grids[2][2], "\n",
-               "C ", grids[2][0], "  ", grids[1][1], "  ", grids[2][2], "\n")
+
+
+def format_grid(gi0, gi1, side):
+    grids[gi0][gi1] = side
+    formatGrids = ("  1  2  3\n",
+                   "A ", grids[0][0], "   ", grids[0][1], "   ", grids[0][2], "\n",
+                   "B ", grids[1][0], "   ", grids[2][1], "   ", grids[2][2], "\n",
+                   "C ", grids[2][0], "   ", grids[1][1], "   ", grids[2][2], "\n")
+
+    print(grids)
+    print(formatGrids)
+    printGrid = ''.join(e for e in formatGrids)
+    print(printGrid)
+    return
 
 
 #   1  2  3
@@ -15,6 +25,7 @@ formatGrids = ("  1  2  3",
 
 
 def player_turn():
+    printedGrid = ''
     while True:
         print("Input your choice:")
         user_input = input("> ")
@@ -35,8 +46,7 @@ def player_turn():
                 case '3':
                     gi[1] = 2
             if grids[gi[0]][gi[1]] == '':
-                grids[gi[0]][gi[1]] = 'X'
-                # print(grids[gi[0]][gi[1]])
+                format_grid(gi[0], gi[1], 'X')
                 break
         print("ERROR: Please enter an empty grid in the format of: A1.")
 
@@ -55,10 +65,10 @@ def tictactoe_prompt():
     print(first)  # computer decide and print which side goes first
     if first == 'X':
         player_turn()
-        # print grid here
+
     # else:
     #     system_turn()
 
 
 if __name__ == "__main__":
-    tictactoe_prompt()
+    player_turn()
