@@ -1,5 +1,3 @@
-from typing import List
-
 from modules.app1_password_gen import password_gen_prompt
 from modules.app2_character_sorter import char_sorter_prompt
 from modules.app3_num_guesser import num_guesser_prompt
@@ -8,10 +6,8 @@ if __name__ == '__main__':
 
     while True:  # infinite loop until the break
         # asks user the length of the password
-        listOfApps: list[str] = []
-        listOfApps.append("Password Generator-------1")
-        listOfApps.append("Object Sorter------------2")
-        listOfApps.append("Number Guesser-----------3")
+        listOfApps: list[str] = ["Password Generator-------1", "Object Sorter------------2",
+                                 "Number Guesser-----------3", "Tic Tac Toe--------------4"]
         print(len(listOfApps))
         print("Select the application:")
         for app in listOfApps:
