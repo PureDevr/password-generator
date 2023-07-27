@@ -1,21 +1,20 @@
 import random
 import time
 
-grids = [['', '', ''], ['', '', ''], ['', '', '']]
+GRID = [['', '', 'X'], ['', '', ''], ['', '', '']]
 
 
 def format_grid(gi0, gi1, side):
-    grids[gi0][gi1] = side
-    formatGrids = ("  1  2  3\n",
-                   "A ", grids[0][0], "   ", grids[0][1], "   ", grids[0][2], "\n",
-                   "B ", grids[1][0], "   ", grids[2][1], "   ", grids[2][2], "\n",
-                   "C ", grids[2][0], "   ", grids[1][1], "   ", grids[2][2], "\n")
+    GRID[gi0][gi1] = side
+    formatGrid = ("  1  2  3\n",
+                  "A ", GRID[0][0], "   ", GRID[0][1], "   ", GRID[0][2], "\n",
+                  "B ", GRID[1][0], "   ", GRID[2][1], "   ", GRID[2][2], "\n",
+                  "C ", GRID[2][0], "   ", GRID[1][1], "   ", GRID[2][2], "\n")
 
-    print(grids)
-    print(formatGrids)
-    printGrid = ''.join(e for e in formatGrids)
+    # print(GRIDS)
+    # print(formatGrids)
+    printGrid = ''.join(e for e in formatGrid)
     print(printGrid)
-    return
 
 
 #   1  2  3
@@ -45,8 +44,9 @@ def player_turn():
                     gi[1] = 1
                 case '3':
                     gi[1] = 2
-            if grids[gi[0]][gi[1]] == '':
+            if GRID[gi[0]][gi[1]] == '':
                 format_grid(gi[0], gi[1], 'X')
+                print("test")
                 break
         print("ERROR: Please enter an empty grid in the format of: A1.")
 
