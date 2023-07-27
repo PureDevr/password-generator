@@ -1,20 +1,30 @@
 import random
 import time
 
-GRID = [['', '', 'X'], ['', '', ''], ['', '', '']]
+GRID = [[' ', ' ', ' '], ['X', ' ', ' '], ['X', ' ', ' ']]  # 3x3 grid left to right, up to down
 
 
-def format_grid(gi0, gi1, side):
+def line_check():
+    if any(GRID[n1][0] == GRID[n1][1] == GRID[n1][2] for n1 in range(3)) or \
+       any(GRID[0][n2] == GRID[1][n2] == GRID[2][n2] for n2 in range(3)) or \
+       (GRID[0][0] == GRID[1][1] == GRID[2][2]) or \
+       (GRID[0][2] == GRID[1][1] == GRID[2][0]):  # check for horizontal, vertical, both slant lines
+        return 1
+    return 0
+
+
+def print_grid(gi0, gi1, side):
     GRID[gi0][gi1] = side
     formatGrid = ("  1  2  3\n",
-                  "A ", GRID[0][0], "   ", GRID[0][1], "   ", GRID[0][2], "\n",
-                  "B ", GRID[1][0], "   ", GRID[2][1], "   ", GRID[2][2], "\n",
-                  "C ", GRID[2][0], "   ", GRID[1][1], "   ", GRID[2][2], "\n")
+                  "A ", GRID[0][0], "  ", GRID[0][1], "  ", GRID[0][2], "\n",
+                  "B ", GRID[1][0], "  ", GRID[2][1], "  ", GRID[2][2], "\n",
+                  "C ", GRID[2][0], "  ", GRID[1][1], "  ", GRID[2][2], "\n")
 
     # print(GRIDS)
     # print(formatGrids)
     printGrid = ''.join(e for e in formatGrid)
     print(printGrid)
+    print(line_check())
 
 
 #   1  2  3
@@ -45,8 +55,9 @@ def player_turn():
                 case '3':
                     gi[1] = 2
             if GRID[gi[0]][gi[1]] == '':
-                format_grid(gi[0], gi[1], 'X')
-                print("test")
+                print_grid(gi[0], gi[1], 'X')
+                if line_check() == 1:
+                    print("You won!")
                 break
         print("ERROR: Please enter an empty grid in the format of: A1.")
 
@@ -71,4 +82,4 @@ def tictactoe_prompt():
 
 
 if __name__ == "__main__":
-    player_turn()
+    print_grid(0, 0, 'X')
