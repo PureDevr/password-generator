@@ -1,14 +1,14 @@
 import random
 import time
 
-GRID = [[' ', ' ', ' '], ['X', ' ', ' '], ['X', ' ', ' ']]  # 3x3 grid left to right, up to down
+GRID = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]  # 3x3 grid left to right, up to down
 
 
 def line_check():  # check for connected lines = one side win
-    if any(GRID[n1][0] == GRID[n1][1] == GRID[n1][2] for n1 in range(3)) or \
-       any(GRID[0][n2] == GRID[1][n2] == GRID[2][n2] for n2 in range(3)) or \
-       (GRID[0][0] == GRID[1][1] == GRID[2][2]) or \
-       (GRID[0][2] == GRID[1][1] == GRID[2][0]):  # check for horizontal, vertical, both slant lines
+    if any((GRID[n1][0] == GRID[n1][1] == GRID[n1][2] != ' ') for n1 in range(3)) or \
+            any((GRID[0][n2] == GRID[1][n2] == GRID[2][n2] != ' ') for n2 in range(3)) or \
+            (GRID[0][0] == GRID[1][1] == GRID[2][2] != ' ') or \
+            (GRID[0][2] == GRID[1][1] == GRID[2][0] != ' '):  # check for horizontal, vertical, both slant lines
         return 1  # return 1 back to whoever turn function that called this, notifying that the side won.
     return
 
@@ -17,8 +17,8 @@ def print_grid(gi0, gi1, side):  # the to-be-changed grid's 2D index and side (X
     GRID[gi0][gi1] = side
     formatGrid = ("   1  2  3\n",
                   "A  ", GRID[0][0], "  ", GRID[0][1], "  ", GRID[0][2], "\n",
-                  "B  ", GRID[1][0], "  ", GRID[2][1], "  ", GRID[2][2], "\n",
-                  "C  ", GRID[2][0], "  ", GRID[1][1], "  ", GRID[2][2], "\n")
+                  "B  ", GRID[1][0], "  ", GRID[1][1], "  ", GRID[1][2], "\n",
+                  "C  ", GRID[2][0], "  ", GRID[2][1], "  ", GRID[2][2], "\n")
     # This is what the printed grid looks like:
     #    1  2  3
     # A  X  X  X
@@ -49,10 +49,10 @@ def player_turn():
                     gi[1] = 1
                 case '3':
                     gi[1] = 2
-            if GRID[gi[0]][gi[1]] == '':  # if the user selected grid is empty
+            if GRID[gi[0]][gi[1]] == ' ':  # if the user selected grid is empty
                 print_grid(gi[0], gi[1], 'X')  # finally call to update and print new grid
                 if line_check() == 1:  # call line check see if there is a line connected
-                    print("You won!")
+                    print("You won!\n")
                     return  # return to tictactoe_prompt (which will redirect back to main.py)
                 break  # if no line, break out of this while loop and call system_turn() to switch side
         print("ERROR: Please enter an empty grid in the format of: A1.")  # if dummy input, error and restart while tru
@@ -60,18 +60,29 @@ def player_turn():
 
 
 def system_turn():
-    return
+    print("System's Turn...")
+    while True:  # randomly choose an empty grid
+        gi0, gi1 = random.randint(0, 2), random.randint(0, 2)  # randomly select the grid
+        if GRID[gi0][gi1] == ' ':  # if the selected grid is empty, send to update function
+            time.sleep(1)  # wait for 1 second before showing updated grid for less confusion for user
+            print_grid(gi0, gi1, 'O')
+            break
+    if line_check() == 1:  # call line check see if there is a line connected
+        print("System won!\n")
+        return
+    player_turn()
 
 
 def tictactoe_prompt():
-    print("Tic Tac Toe: First to form a line wins.\nYOU: X\tSYSTEM: O\n\nDeciding which side goes first", end = '')
+    print("Tic Tac Toe: First to form a line wins.\nYOU: X\tSYSTEM: O\n\nDeciding which side goes first", end='')
     for _ in range(3):
         time.sleep(1)
-        print('.', end='', flush=True)
-    time.sleep(3)
+        print('.', end='', flush=True)  # Force print each dot instead of bulking them
+    time.sleep(1)
     xo = ['X', 'O']
     first = random.choice(xo)
     print(first)  # computer decide and print which side goes first
+    print_grid(0, 0, ' ')  # print an empty grid
     if first == 'X':  # this is where it starts. flow won't come back to this function until the end.
         player_turn()
     else:
@@ -80,4 +91,4 @@ def tictactoe_prompt():
 
 
 if __name__ == "__main__":
-    print_grid(0, 0, 'X')
+    tictactoe_prompt()

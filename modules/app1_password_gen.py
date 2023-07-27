@@ -7,7 +7,7 @@ def password_gen_prompt():
 
     while True:  # infinite loop until the break
         # asks user the length of the password
-        print("Length of your password:")
+        print("Length of your password (8 <= x <= 256):")
         user_input = input("> ")
         pw_length = ''.join(c for c in user_input if c.isnumeric())
         if len(pw_length) > 0:

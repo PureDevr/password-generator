@@ -29,7 +29,7 @@ def char_sorter_prompt():
             sorted_str += allowed_char[i_occurrences]
 
     # print(occurrences)
-    print(sorted_str)
+    print(sorted_str + "\n")
     # print("test")
 
 

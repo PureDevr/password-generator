@@ -7,7 +7,7 @@ def num_guesser_prompt():
     print("You will have 7 guesses.")
     min_number, max_number = 0, 999
     number = random.randint(min_number, max_number)
-    # print(number)
+    print(number)
 
     for i in range(7):
         while True:
@@ -22,9 +22,9 @@ def num_guesser_prompt():
         elif int(user_guess) > number:
             print("LOWER!")
         else:
-            print("CORRECT")
-            exit()
-    print("You lost! The number is: " + str(number))
+            print("CORRECT!\n")
+            return
+    print("You lost! The number is: " + str(number) + "\n")
 # TBA: HOW MANY CHANCES LEFT.
 
 
