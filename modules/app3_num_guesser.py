@@ -7,7 +7,7 @@ def num_guesser_prompt():
     print("You will have 7 guesses.")
     min_number, max_number = 0, 999
     number = random.randint(min_number, max_number)
-    print(number)
+    # print(number)
 
     for i in range(7):
         while True:
