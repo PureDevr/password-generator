@@ -1,6 +1,5 @@
 import random
 import time
-
 GRID = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]  # 3x3 grid left to right, up to down
 
 
@@ -29,7 +28,7 @@ def print_grid(gi0, gi1, side):  # the to-be-changed grid's 2D index and side (X
 
 
 def player_turn():
-    printedGrid = ''
+    # printedGrid = ''
     while True:  # infinite loop in the case of dummy-input
         print("Input your choice:")
         user_input = input("> ")
@@ -74,6 +73,8 @@ def system_turn():
 
 
 def tictactoe_prompt():
+    global GRID
+    GRID = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]  # 3x3 grid left to right, up to down
     print("Tic Tac Toe: First to form a line wins.\nYOU: X\tSYSTEM: O\n\nDeciding which side goes first", end='')
     for _ in range(3):
         time.sleep(1)
@@ -82,11 +83,12 @@ def tictactoe_prompt():
     xo = ['X', 'O']
     first = random.choice(xo)
     print(first)  # computer decide and print which side goes first
-    print_grid(0, 0, ' ')  # print an empty grid
     if first == 'X':  # this is where it starts. flow won't come back to this function until the end.
+        print_grid(0, 0, ' ')  # print an empty grid when it is the player starting so player can choose
         player_turn()
     else:
         system_turn()
+    # need to add something that resets data
     return
 
 

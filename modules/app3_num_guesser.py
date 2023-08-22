@@ -9,7 +9,7 @@ def num_guesser_prompt():
     number = random.randint(min_number, max_number)
     # print(number)
 
-    for i in range(7):
+    for i in range(8):
         while True:
             print("Enter your guess:")
             user_input = input("> ")

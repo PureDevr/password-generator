@@ -1,7 +1,7 @@
 from modules.app1_password_gen import password_gen_prompt
 from modules.app2_character_sorter import char_sorter_prompt
 from modules.app3_num_guesser import num_guesser_prompt
-import modules.app4_tictactoe
+from modules.app4_tictactoe import tictactoe_prompt
 
 if __name__ == '__main__':
     while True:
@@ -30,4 +30,4 @@ if __name__ == '__main__':
             case 3:
                 num_guesser_prompt()
             case 4:
-                modules.app4_tictactoe.tictactoe_prompt()
+                tictactoe_prompt()
